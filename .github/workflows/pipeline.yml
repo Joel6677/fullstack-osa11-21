@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - master
-    pull_request:
-      branches: [master]
-      types: [opened, synchronize]
+    # pull_request:
+    #   branches: [master]
+    #   types: [opened, synchronize]
       
 jobs:
   simple_deployment_pipeline:
@@ -17,13 +17,17 @@ jobs:
         with:
           node-version: '12.x'
       - name: npm install 
-        run: cd redux-anecdotes && npm install
+        working-directory: './redux-anecdotes'
+        run: npm install
       - name: lint
-        run: cd redux-anecdotes && npm run lint
+        working-directory: './redux-anecdotes'
+        run: npm run lint
       - name: build
-        run: cd redux-anecdotes && npm run build
+        working-directory: './redux-anecdotes'
+        run: npm run build
       - name: test
-        run: cd redux-anecdotes && npm run test
+        working-directory: './redux-anecdotes'
+        run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
