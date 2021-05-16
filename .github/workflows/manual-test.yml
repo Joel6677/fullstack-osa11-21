@@ -1,0 +1,36 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+    # pull_request:
+    #   branches: [master]
+    #   types: [opened, synchronize]
+      
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install 
+        working-directory: './redux-anecdotes'
+        run: npm install
+      - name: lint
+        working-directory: './redux-anecdotes'
+        run: npm run lint
+      - name: build
+        working-directory: './redux-anecdotes'
+        run: npm run build
+      - name: test
+        working-directory: './redux-anecdotes'
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: cd redux-anecdotes && npm run test:e2e
+          start: npm run server
+          wait-on: http://localhost:3001
