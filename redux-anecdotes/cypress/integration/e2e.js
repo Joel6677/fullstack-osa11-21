@@ -4,7 +4,7 @@ describe('Redux-anecdotes', function () {
     cy.contains('Anecdotes')
     cy.contains('create new')
   })
-    
+      
   it('can add anecdote', function () {
     cy.get('#create-anecdote').type('testi')
     cy.get('#add-button').click()

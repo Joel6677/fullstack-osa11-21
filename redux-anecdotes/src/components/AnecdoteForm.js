@@ -18,8 +18,8 @@ const NewAnecdote = (props) => {
     <div>
       <h2>create new</h2>
       <form onSubmit={addAnecdote}>
-        <input name="anecdote" />
-        <button type="submit">add</button>
+        <input id="create-anecdote" name="anecdote" />
+        <button id= "add-button" type="submit">add</button>
       </form>
     </div>
 
