@@ -30,7 +30,8 @@ jobs:
       #   run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
+        working-directory: './redux-anecdotes'
         with:
-          command: cd redux-anecdotes && npm run test:e2e
-          start: cd redux-anecdotes && npm run server
+          command: npm run test:e2e
+          start: npm run server
           wait-on: http://localhost:3001
