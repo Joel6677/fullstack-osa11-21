@@ -25,9 +25,6 @@ jobs:
       - name: build
         working-directory: './redux-anecdotes'
         run: npm run build
-      # - name: test
-      #   working-directory: './redux-anecdotes'
-      #   run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
@@ -35,3 +32,9 @@ jobs:
           start: npm run server, npm start
           working-directory: './redux-anecdotes'
           wait-on: http://localhost:3001
+      - name: heroku deploy
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "my-redux-anecdotes" #Must be unique in Heroku
+          heroku_email: "joel.heusala@gmail.com"
